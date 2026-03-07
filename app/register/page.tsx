@@ -8,10 +8,32 @@ export default function RegisterPage() {
     const [password, setPassword] = useState("");
     const router = useRouter();
 
-    const handleRegister = () => {
-        //todo: java connecton
-        localStorage.setItem("user_session", "active");
-        router.push("/home");
+    const handleRegister = async () => {
+        
+        const userData = {
+            email: email,
+            username: username,
+            password: password
+        };
+
+        try {
+            const response = await fetch("http://localhost:8080/api/users/register", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(userData)
+            });
+
+            if (response.ok){
+                const data = await response.json();
+                console.log("Registration successful:", data);
+                localStorage.setItem("user_session", JSON.stringify(data));
+                router.push("/home");
+            }
+        } catch (error){
+            console.error("Registration failed:", error);
+        }
     };
 
     return (
