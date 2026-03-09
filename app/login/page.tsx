@@ -19,7 +19,7 @@ export default function LoginPage() {
                 const data = await response.json();
                 console.log("Login successful:", data);
                 localStorage.setItem("user_session", JSON.stringify(data));
-                router.push("/home");
+                router.push("/dashboard");
             }
         } catch (error){
             console.error("Login failed:", error);

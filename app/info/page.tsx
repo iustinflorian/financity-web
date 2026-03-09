@@ -2,7 +2,7 @@
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-export default function HomePage() {
+export default function InfoPage() {
     const [accounts, setAccounts] = useState<any[]>([]);
     const [user, setUser] = useState<any>(null);
     const router = useRouter();
@@ -14,33 +14,30 @@ export default function HomePage() {
             const parsed = JSON.parse(session || ""); 
             setUser(parsed);
 
-            fetch(`http://localhost:8080/api/accounts/${parsed.id}/acc`)
-                .then(res => res.json())
-                .then(data => setAccounts(Array.isArray(data) ? data : []))
-                .catch(err => console.error("API Error"));
+            if (parsed.id != null){
+                fetch(`http://localhost:8080/api/accounts/${parsed.id}/acc`)
+                    .then(res => res.json())
+                    .then(data => setAccounts(Array.isArray(data) ? data : []))
+                    .catch(err => console.error("API Error"));
+            }
         } catch (e) {
             localStorage.clear();
             router.push("/login");
         }
     }, []);
 
-    const logout = () => {
-        localStorage.clear();
-        router.push("/login");
-    };
-
     return (
-        <div style={{ padding: "20px" }}>
-            <h1>Dashboard Financity</h1>
-            <p>Salut, <b>{user?.username}</b>!</p>
+        <div>
+            <h1>Account metrics</h1>
+            <p>Here's a list of your financial entities, <b>{user?.username}</b>!</p>
             
             {accounts.map((acc: any) => (
-                <div key={acc.id} style={{ margin: "10px 0", borderBottom: "1px solid #ccc" }}>
+                <div key={acc.id}>
                     IBAN: {acc.iban} | <b>{acc.balance} RON</b>
                 </div>
             ))}
 
-            <button onClick={logout} style={{ marginTop: "20px" }}>Logout</button>
+            <button onClick={() => router.push("/dashboard")}>Go back</button>
         </div>
     );
 }

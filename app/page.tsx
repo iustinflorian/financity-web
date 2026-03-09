@@ -2,7 +2,7 @@
 import {useEffect, useState} from "react";
 import {useRouter} from "next/navigation";
 
-export default function MainPage() {
+export default function LandingPage() {
     const router = useRouter();
     const [isLogged, setIsLogged] = useState(false);
 

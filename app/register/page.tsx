@@ -29,7 +29,7 @@ export default function RegisterPage() {
                 const data = await response.json();
                 console.log("Registration successful:", data);
                 localStorage.setItem("user_session", JSON.stringify(data));
-                router.push("/home");
+                router.push("/dashboard");
             }
         } catch (error){
             console.error("Registration failed:", error);
