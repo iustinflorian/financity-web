@@ -1,38 +1,57 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 export default function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
+  const [isLogged, setIsLogged] = useState<boolean | null>(null);
+  const pathname = usePathname();
+
+  useEffect(
+    () => {
+      const session = localStorage.getItem("user_session");
+      setIsLogged(!!session);
+  }, [pathname]);
+
+  const logout = () => {
+        localStorage.removeItem("user_session");
+        setIsLogged(false);
+        router.push("/login");
+  };
+
+  if (!isLogged || isLogged === null) {
+    return null;
+  }
 
   return (
     <nav className="nav-container">
-      {/* STANGA: Dropdown & Burger */}
-      <div className="flex-1 flex">
-        <div className="relative">
-          <button onClick={() => setIsOpen(!isOpen)}> Test </button>
-
-          {isOpen && (
-            <div className="nav-dropdown">
-              <button className="nav-link" onClick={() => router.push("/dashboard")}>Dashboard</button>
-              <button className="nav-link" onClick={() => router.push("/info")}>Accounts</button>
-              <button className="nav-link" onClick={() => router.push("/settings")}>Settings</button>
-            </div>
-          )}
+      <div className="nav">
+        <div className="container">
+          <div className="btn" onClick={() => router.push("/dashboard")}>Dashboard</div>
+          <div className="btn" onClick={() => router.push("/info")}>Information</div>
+          <div className="btn" onClick={() => router.push("/logs")}>Transactions</div>
+          <div className="btn" onClick={logout}>Logout</div>
+          <svg
+            className="outline"
+            overflow="visible"
+            width="600"
+            height="60"
+            viewBox="0 0 600 60"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+          <rect
+            className="rect"
+            pathLength="100"
+            x="0"
+            y="0"
+            width="600"
+            height="60"
+            fill="transparent"
+            strokeWidth="4"
+          ></rect>
+          </svg>
         </div>
-      </div>
-
-      {/* MIJLOC: Logo */}
-      <div className="flex-none">
-        <span className="nav-logo">FINANCITY</span>
-      </div>
-
-      {/* DREAPTA: Account */}
-      <div className="flex-1 flex justify-end">
-        <button className="nav-account-btn" onClick={() => router.push("/settings")}>
-          👤
-        </button>
       </div>
     </nav>
   );

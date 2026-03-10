@@ -27,21 +27,19 @@ export default function LoginPage() {
     };
 
     return (
-        <div>
-            <h1>Login</h1>
-            <input 
-                type = "email"
-                placeholder = "Enter your email"
-                value = {email}
-                onChange={(e) => setEmail(e.target.value)}
-            />
-            <input
-                type = "password"
-                placeholder = "Enter your password"
-                value = {password}
-                onChange={(e) => setPassword(e.target.value)}
-            />
-            <button onClick={handleLogin}>Login</button>
+    <main className="login-page">
+      <div className="login-card">
+        <h1>LOGIN</h1>
+        
+        <div className="input-group">
+          <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
+          <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
         </div>
-    );
+
+        <div className="login-btn-container" onClick={handleLogin}>
+          <span className="btn-text">Sign In</span>
+        </div>
+      </div>
+    </main>
+  );
 }

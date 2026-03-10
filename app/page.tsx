@@ -10,7 +10,7 @@ export default function LandingPage() {
         () => {
             const user = localStorage.getItem("user_session");
             if(user){
-                router.push("/home");
+                router.push("/dashboard");
             }
         }
     )

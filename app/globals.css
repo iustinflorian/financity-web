@@ -1,50 +1,93 @@
 @import "tailwindcss";
 
-@layer components {
-  .button {
-    @apply px-6 py-3 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 text-white rounded-xl backdrop-blur-md transition-all active:scale-95;
-  }
-  .button:disabled {
-    @apply opacity-50 cursor-not-allowed;
-  }
-  .nav-container{
-    @apply fixed top-0 left-0 w-full h-16 flex items-center px-6 z-50 
-           bg-white/5 backdrop-blur-md border-b border-white/10;
-  }
-  .nav-logo{
-    @apply text-xl font-black tracking-tighter bg-gradient-to-r 
-           from-blue-400 to-emerald-400 bg-clip-text text-transparent uppercase;
-  }
-  .nav-dropdown{
-    @apply absolute top-14 left-4 w-48 p-2 rounded-xl shadow-2xl
-           bg-[#1e1e1e] border border-white/10 flex flex-col gap-1;
-  }
-  .nav-link{
-    @apply px-4 py-2 text-sm text-left rounded-lg hover:bg-white/5 transition-colors;
-  }
-  .nav-acc-btn{
-    @apply w-10 h-10 flex items-center justify-center rounded-full 
-           bg-blue-600/20 border border-blue-500/50 hover:bg-blue-600 transition-all;
-  }
+.outline {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
 }
+
+.rect {
+  stroke-dashoffset: 5;
+  stroke-dasharray: 0 0 10 40 10 40;
+  transition: 0.5s;
+  stroke: #fff;
+}
+
+.nav {
+  position: relative;
+  width: 600px;
+  height: 60px;
+  margin: 0 auto;
+  margin-top: 2rem;
+}
+
+.container:hover .outline .rect {
+  transition: 999999s;
+  /* Must specify these values here as something *different* just so that the transition works properly */
+  stroke-dashoffset: 1;
+  stroke-dasharray: 0;
+}
+
+.container {
+  position: absolute;
+  inset: 0;
+  background: #bef6;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0.5em;
+}
+
+.btn {
+  padding: 0.5em 1.5em;
+  color: #fff;
+  cursor: pointer;
+  transition: 0.1s;
+}
+
+.btn:hover {
+  background: #fff3;
+}
+
+.btn:nth-child(1):hover ~ svg .rect {
+  stroke-dashoffset: 0;
+  stroke-dasharray: 0 2 8 73.3 8 10.7;
+}
+
+.btn:nth-child(2):hover ~ svg .rect {
+  stroke-dashoffset: 0;
+  stroke-dasharray: 0 12.6 9.5 49.3 9.5 31.6;
+}
+
+.btn:nth-child(3):hover ~ svg .rect {
+  stroke-dashoffset: 0;
+  stroke-dasharray: 0 24.5 8.5 27.5 8.5 55.5;
+}
+
+.btn:nth-child(4):hover ~ svg .rect {
+  stroke-dashoffset: 0;
+  stroke-dasharray: 0 34.7 6.9 10.2 6.9 76;
+}
+
+.btn:hover ~ .outline .rect {
+  stroke-dashoffset: 0;
+  stroke-dasharray: 0 0 10 40 10 40;
+  transition: 0.5s !important;
+}
+
+
 
 :root {
-  --background-start: rgb(7, 34, 114); 
-  --background-end: rgb(34, 43, 84);
+  --background-start: rgb(41, 42, 46); 
+  --background-end: rgb(8, 12, 31);
   --foreground: #ededed;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background-start: rgb(1, 8, 28); 
-    --background-end: rgb(136, 32, 109);
+    --background-start: rgb(0, 0, 0); 
+    --background-end: rgb(56, 74, 95);
     --foreground: #ededed;
   }
 }
@@ -55,4 +98,82 @@ body {
   min-height: 100vh;
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Containerul Pagină */
+.login-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 50vh;
+  padding: 20px;
+}
+
+/* Cardul Alb */
+.login-card {
+  background: white;
+  padding: 2.5rem;
+  border-radius: 1.5rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  text-align: center;
+}
+
+.login-card h1 {
+  color: #334155;
+  font-size: 1.8rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+/* Input-uri */
+.input-group input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 1rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  color: #000;
+  outline: none;
+}
+
+/* Butonul tău FIXAT */
+.login-btn-container {
+  position: relative;
+  width: 100%;
+  height: 60px;
+  background: #6b3fa0;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  overflow: hidden; /* Foarte important: să nu iasă SVG-ul afară */
+}
+
+.btn-text {
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+  z-index: 2;
+}
+
+.rect {
+  fill: transparent;
+  stroke: white;
+  stroke-width: 4;
+  width: 100%;
+  height: 100%;
+  /* Animarea ta originală adaptată */
+  stroke-dasharray: 0 100;
+  stroke-dashoffset: 0;
+  transition: 0.6s ease;
+}
+
+.login-btn-container:hover .rect {
+  stroke-dasharray: 100 0;
 }
