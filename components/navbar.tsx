@@ -1,7 +1,8 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Profiler } from "react";
 import { useRouter } from "next/navigation";
 import { usePathname } from "next/navigation";
+import { LogOut, LucidePersonStanding, PersonStanding, Settings } from "lucide-react";
 
 export default function Navbar() {
   const router = useRouter();
@@ -24,22 +25,29 @@ export default function Navbar() {
     return null;
   }
 
+  const isActive = (path : string) => pathname === path;
+
   return (
   <nav className="nav-container">
     <div className="nav">
       <div className="container">
-        <div className="btn" onClick={() => router.push("/dashboard")}>
+        <div className={`btn ${isActive("/dashboard") ? "active" : ""}`} onClick={() => router.push("/dashboard")}>
           Dashboard
         </div>
-        <div className="btn" onClick={() => router.push("/info")}>
+        <div className={`btn ${isActive("/info") ? "active" : ""}`} onClick={() => router.push("/info")}>
           Information
         </div>
-        <div className="btn" onClick={() => router.push("/logs")}>
+        <div className={`btn ${isActive("/trx") ? "active" : ""}`} onClick={() => router.push("/trx")}>
           Transactions
         </div>
-        {/* Putem adăuga un stil special pentru Logout dacă vrei */}
-        <div className="btn" onClick={logout} style={{ color: '#d32f2f' }}>
-          Logout
+        <div className={`btn ${isActive("/settings") ? "active" : ""}`} onClick={() => router.push("/settings")}>
+          <Settings size={18} strokeWidth={2.5} /> <span></span>
+        </div>
+        <div className={`btn ${isActive("/personal") ? "active" : ""}`} onClick={() => router.push("/personal")}>
+          <PersonStanding size={18} strokeWidth={2.5} /> <span></span>
+        </div>
+        <div className="btn" onClick={logout}>
+          <LogOut size={18} strokeWidth={2.5} /> <span></span>
         </div>
       </div>
     </div>

@@ -1,30 +1,13 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useAccounts } from "../hooks/useAccounts";
 
 export default function InfoPage() {
-    const [accounts, setAccounts] = useState<any[]>([]);
-    const [user, setUser] = useState<any>(null);
+    const { accounts, user, loading } = useAccounts();
     const router = useRouter();
 
-    useEffect(() => {
-        const session = localStorage.getItem("user_session");
-        
-        try {
-            const parsed = JSON.parse(session || ""); 
-            setUser(parsed);
-
-            if (parsed.id != null){
-                fetch(`http://localhost:8080/api/accounts/${parsed.id}/acc`)
-                    .then(res => res.json())
-                    .then(data => setAccounts(Array.isArray(data) ? data : []))
-                    .catch(err => console.error("API Error"));
-            }
-        } catch (e) {
-            localStorage.clear();
-            router.push("/login");
-        }
-    }, []);
+    if (loading) return <div className="dashboard-wrapper">Loading...</div>;
 
     return (
         <div>
@@ -33,7 +16,7 @@ export default function InfoPage() {
             
             {accounts.map((acc: any) => (
                 <div key={acc.id}>
-                    IBAN: {acc.iban} | <b>{acc.balance} RON</b>
+                    NAME: {acc.name} | TYPE: {acc.accountType} | IBAN: {acc.iban} | <b>{acc.balance} RON</b>
                 </div>
             ))}
 

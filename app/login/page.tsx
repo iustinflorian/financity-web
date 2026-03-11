@@ -30,7 +30,7 @@ export default function LoginPage() {
     <form className="form">
         <p className="heading">
                     Get back into 
-                    <span className="bg-gradient-to-r from-blue-800 to-green-500 bg-clip-text text-transparent font-bold"> FinanCity</span>
+                    <span className="bg-linear-to-r from-blue-800 to-green-500 bg-clip-text text-transparent font-bold"> FinanCity</span>
                 </p>
         <input 
           className="input"

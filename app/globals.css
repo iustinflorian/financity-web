@@ -6,14 +6,6 @@
   --foreground: #ededed;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background-start: rgb(0, 0, 0); 
-    --background-end: rgb(56, 74, 95);
-    --foreground: #ededed;
-  }
-}
-
 body {
   margin: 0;
   justify-content: center;
@@ -22,10 +14,53 @@ body {
   background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
 }
 
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background-start: rgb(0, 0, 0); 
+    --background-end: rgb(56, 74, 95);
+    --foreground: #ededed;
+  }
+}
+
+@media (max-width: 600px) {
+  .nav .container {
+    flex-wrap: wrap; 
+    justify-content: center;
+    gap: 8px !important;
+    padding: 15px !important;
+    width: 90%;
+    margin: 0 auto;
+  }
+
+  .nav-container {
+    padding-top: 5px !important;
+    padding-bottom: 1px !important;
+  }
+
+  .btn {
+    padding: 8px 12px !important;
+    font-size: 12px !important;
+    flex: 1 1 calc(40% - 10px);
+    text-align: center;
+  }
+
+  .dashboard-grid {
+    grid-template-columns: 1fr !important; 
+    gap: 20px;
+  }
+
+  .card {
+    width: 100% !important;
+    box-sizing: border-box; 
+  }
+
+  .span-full, .span-2 {
+    grid-column: span 1 !important;
+  }
+}
 
 /* ---------------------------------------- NAVBAR */
 
-/* Containerul care centrează navbar-ul pe pagină */
 .nav-container {
   width: 100%;
   display: flex;
@@ -33,38 +68,28 @@ body {
   padding: 20px 0;
 }
 
-/* Navbar-ul propriu-zis (fosta ta clasă .nav .container) */
-/* Am aplicat proprietățile de la .form */
 .nav .container {
   display: flex;
-  flex-direction: row; /* Navbar-ul e orizontal */
+  flex-direction: row;
   align-items: center;
-  gap: 15px;
+  gap: 30px;
   background-color: white;
-  padding: 1em 2em; /* Puțin mai îngust pe verticală decât form-ul */
+  padding: 1em 2em;
   border-radius: 25px;
   transition: .4s ease-in-out;
-  box-shadow: rgba(0, 0, 0, 0.4) 1px 2px 2px;
+  box-shadow: 6px 6px 0px #666666;
   border: 1px solid transparent;
 }
 
-/* Efectul de hover pe tot navbar-ul (la fel ca .form:hover) */
-.nav .container:hover {
-  transform: translateX(-0.5em) translateY(-0.5em);
-  border: 1px solid #171717;
-  box-shadow: 10px 10px 0px #666666;
-}
-
-/* Butoanele din navbar (la fel ca .form .btn) */
 .btn {
-  all: unset; /* Curățăm stilul default de buton */
+  all: unset; 
   cursor: pointer;
   padding: 0.7em 1.2em;
   border-radius: 10px;
   border: none;
   color: black;
   font-weight: bold;
-  background-color: whitesmoke; /* Fundalul de la input-uri */
+  background-color: whitesmoke; 
   transition: .4s ease-in-out;
   box-shadow: rgba(0, 0, 0, 0.4) 1px 1px 1px;
 }
@@ -75,10 +100,68 @@ body {
   background-color: white;
 }
 
-.btn:active {
-  transition: .2s;
-  transform: translateX(0em) translateY(0em);
-  box-shadow: none;
+.btn.active {
+  background: linear-gradient(90deg, #3b82f6, #2dd4bf);
+  color: white;
+  border: none;
+  box-shadow: rgba(0, 0, 0, 0.4) 1px 1px 1px;
+}
+
+.btn.active:hover {
+  box-shadow: 6px 6px 0px #969696, -3px -3px 10px #ffffff;
+  transform: translateX(-0.5em) translateY(-0.5em);
+  background-color: white;
+}
+
+/* ---------------------------------------- DASHBOARD */
+
+.dashboard-wrapper {
+  padding: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr; 
+  grid-auto-rows: minmax(120px, auto); 
+  gap: 15px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.card {
+  background-color: white;
+  border-radius: 25px;
+  padding: 1.2rem;
+  box-shadow: rgba(0, 0, 0, 0.4) 1px 2px 2px;
+  transition: .4s ease-in-out;
+  border: 1px solid transparent;
+  display: flex;
+  flex-direction: column;
+}
+
+.card:hover {
+  transform: translateX(-0.3em) translateY(-0.3em);
+  border: 1px solid #171717;
+  box-shadow: 6px 6px 0px #666666;
+}
+
+.span-full {
+  grid-column: span 2;
+  min-height: 250px; 
+}
+
+.placeholder-box {
+  flex: 1;
+  background-color: whitesmoke;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #494949;
+  font-weight: bold;
+  font-size: 0.8rem;
 }
 
 /* ---------------------------------------- FORM */
@@ -157,10 +240,8 @@ body {
 
 /*----------------------------------------- DASHBOARD */
 
-/* Containerul care ține tot Dashboard-ul */
 .dashboard-grid {
   display: grid;
-  /* Creăm 3 coloane egale care se adaptează ecranului */
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 20px;
   padding: 20px;
@@ -168,8 +249,6 @@ body {
   margin: 0 auto;
 }
 
-/* Stilul de bază pentru orice "casetă" (card) din Dashboard */
-/* Aplicăm stilul tău memorat: whitesmoke, border-radius 25px, shadow */
 .dashboard-card {
   background-color: white;
   border-radius: 25px;

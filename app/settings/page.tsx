@@ -53,44 +53,44 @@ export default function SettingsPage () {
     };
 
     return (
-        <div>
-            <h1>Settings</h1>
-            <button onClick={() => setShowModal(true)}>Change password</button><br/>
-            <button onClick={() => router.push("/dashboard")}>Go back</button>
- 
-            {showModal && (
-                <div>
-                    <h3>Enter your old password</h3>
-                    <input
-                        type="password"
-                        placeholder="Enter password.."
-                        value={oldPassword}
-                        onChange={(e) => setOldPassword(e.target.value)}
-                    /><br/>
-                    <input
-                        type="password"
-                        placeholder="Confirm password.."
-                        value={confirmPassword}
-                        onChange={(e) => setConfirmPassword(e.target.value)}
-                    /><br/>
-                    <h3>Enter your new password</h3>
-                    <input
-                        type="password"
-                        placeholder="New password.."
-                        value={newPassword}
-                        onChange={(e) => setNewPassword(e.target.value)}
-                    /><br/>
+        <div className={`max-w-md mx-auto`}>
+                    {!showModal && (
+                        <form className="form">
+                            <button className="btn" type="button" onClick={() => setShowModal(true)}>Change password</button><br/>
+                        </form>
+                    )}
+        
+                    {showModal && (
+                        <form className="form">
+                            <br></br>
+                            <h3 className="heading">Enter your old password</h3>
+                            <input
+                                className="input"
+                                type="password"
+                                placeholder="Enter password.."
+                                value={oldPassword}
+                                onChange={(e) => setOldPassword(e.target.value)}
+                            /><br/>
+                            <input
+                                className="input"
+                                type="password"
+                                placeholder="Confirm password.."
+                                value={confirmPassword}
+                                onChange={(e) => setConfirmPassword(e.target.value)}
+                            /><br/>
+                            <h3 className="heading">Enter your new password</h3>
+                            <input
+                                className="input"
+                                type="password"
+                                placeholder="New password.."
+                                value={newPassword}
+                                onChange={(e) => setNewPassword(e.target.value)}
+                            />
 
-                    <button
-                        onClick={handleUpdatePassword}
-                    >Submit</button><br/>
-
-                    <button
-                        onClick={() => setShowModal(false)}
-                    >Cancel</button>
-
-                </div>
-            )}
+                            <button className="btn" type="button" onClick={handleUpdatePassword}>Submit</button>
+                            <button className="btn" type="button" onClick={() => setShowModal(false)}>Cancel</button>
+                        </form>
+                    )}
         </div>
     );
 }

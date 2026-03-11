@@ -36,7 +36,7 @@ export default function RegisterPage() {
             <form className="form">
                 <p className="heading">
                     One more step! <br/>Type the email and the
-                    <span className="bg-gradient-to-r from-blue-800 to-green-500 bg-clip-text text-transparent font-bold"> code </span>
+                    <span className="bg-linear-to-r from-blue-800 to-green-500 bg-clip-text text-transparent font-bold"> code </span>
                     you received.
                 </p>
                 <input
