@@ -25,21 +25,39 @@ export default function LoginPage() {
             console.error("Login failed:", error);
         }
     };
-
-    return (
-    <main className="login-page">
-      <div className="login-card">
-        <h1>LOGIN</h1>
-        
-        <div className="input-group">
-          <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
-          <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
-        </div>
-
-        <div className="login-btn-container" onClick={handleLogin}>
-          <span className="btn-text">Sign In</span>
-        </div>
-      </div>
-    </main>
+    
+  return (
+    <form className="form">
+        <p className="heading">
+                    Get back into 
+                    <span className="bg-gradient-to-r from-blue-800 to-green-500 bg-clip-text text-transparent font-bold"> FinanCity</span>
+                </p>
+        <input 
+          className="input"
+          type="email" 
+          placeholder="email@example.com" 
+          value={email} 
+          onChange={(e) => setEmail(e.target.value)} 
+        />
+        <input 
+          className="input"
+          type="password" 
+          placeholder="•••••••••••" 
+          value={password} 
+          onChange={(e) => setPassword(e.target.value)} 
+        /> 
+        <button 
+          className="btn" 
+          type="button"
+          onClick={handleLogin}>Login</button>
+        <button 
+          className="cursor-pointer text-sm bg-blue-700 bg-clip-text text-transparent"
+          type="button"
+          onClick={
+            () => {
+              router.push("/register")
+            }
+        }>Don't have an account? Create one!</button>
+    </form>
   );
 }

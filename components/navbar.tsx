@@ -25,34 +25,24 @@ export default function Navbar() {
   }
 
   return (
-    <nav className="nav-container">
-      <div className="nav">
-        <div className="container">
-          <div className="btn" onClick={() => router.push("/dashboard")}>Dashboard</div>
-          <div className="btn" onClick={() => router.push("/info")}>Information</div>
-          <div className="btn" onClick={() => router.push("/logs")}>Transactions</div>
-          <div className="btn" onClick={logout}>Logout</div>
-          <svg
-            className="outline"
-            overflow="visible"
-            width="600"
-            height="60"
-            viewBox="0 0 600 60"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-          <rect
-            className="rect"
-            pathLength="100"
-            x="0"
-            y="0"
-            width="600"
-            height="60"
-            fill="transparent"
-            strokeWidth="4"
-          ></rect>
-          </svg>
+  <nav className="nav-container">
+    <div className="nav">
+      <div className="container">
+        <div className="btn" onClick={() => router.push("/dashboard")}>
+          Dashboard
+        </div>
+        <div className="btn" onClick={() => router.push("/info")}>
+          Information
+        </div>
+        <div className="btn" onClick={() => router.push("/logs")}>
+          Transactions
+        </div>
+        {/* Putem adăuga un stil special pentru Logout dacă vrei */}
+        <div className="btn" onClick={logout} style={{ color: '#d32f2f' }}>
+          Logout
         </div>
       </div>
-    </nav>
-  );
+    </div>
+  </nav>
+);
 }

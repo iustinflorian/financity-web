@@ -1,83 +1,5 @@
 @import "tailwindcss";
 
-.outline {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-}
-
-.rect {
-  stroke-dashoffset: 5;
-  stroke-dasharray: 0 0 10 40 10 40;
-  transition: 0.5s;
-  stroke: #fff;
-}
-
-.nav {
-  position: relative;
-  width: 600px;
-  height: 60px;
-  margin: 0 auto;
-  margin-top: 2rem;
-}
-
-.container:hover .outline .rect {
-  transition: 999999s;
-  /* Must specify these values here as something *different* just so that the transition works properly */
-  stroke-dashoffset: 1;
-  stroke-dasharray: 0;
-}
-
-.container {
-  position: absolute;
-  inset: 0;
-  background: #bef6;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
-  padding: 0.5em;
-}
-
-.btn {
-  padding: 0.5em 1.5em;
-  color: #fff;
-  cursor: pointer;
-  transition: 0.1s;
-}
-
-.btn:hover {
-  background: #fff3;
-}
-
-.btn:nth-child(1):hover ~ svg .rect {
-  stroke-dashoffset: 0;
-  stroke-dasharray: 0 2 8 73.3 8 10.7;
-}
-
-.btn:nth-child(2):hover ~ svg .rect {
-  stroke-dashoffset: 0;
-  stroke-dasharray: 0 12.6 9.5 49.3 9.5 31.6;
-}
-
-.btn:nth-child(3):hover ~ svg .rect {
-  stroke-dashoffset: 0;
-  stroke-dasharray: 0 24.5 8.5 27.5 8.5 55.5;
-}
-
-.btn:nth-child(4):hover ~ svg .rect {
-  stroke-dashoffset: 0;
-  stroke-dasharray: 0 34.7 6.9 10.2 6.9 76;
-}
-
-.btn:hover ~ .outline .rect {
-  stroke-dashoffset: 0;
-  stroke-dasharray: 0 0 10 40 10 40;
-  transition: 0.5s !important;
-}
-
-
-
 :root {
   --background-start: rgb(41, 42, 46); 
   --background-end: rgb(8, 12, 31);
@@ -93,87 +15,172 @@
 }
 
 body {
-  background: linear-gradient(to bottom right, var(--background-start), var(--background-end));
-  background-attachment: fixed;
-  min-height: 100vh;
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-/* Containerul Pagină */
-.login-page {
-  display: flex;
-  align-items: center;
+  margin: 0;
   justify-content: center;
-  min-height: 50vh;
-  padding: 20px;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
 }
 
-/* Cardul Alb */
-.login-card {
-  background: white;
-  padding: 2.5rem;
-  border-radius: 1.5rem;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+
+/* ---------------------------------------- NAVBAR */
+
+/* Containerul care centrează navbar-ul pe pagină */
+.nav-container {
   width: 100%;
-  max-width: 400px;
+  display: flex;
+  justify-content: center;
+  padding: 20px 0;
+}
+
+/* Navbar-ul propriu-zis (fosta ta clasă .nav .container) */
+/* Am aplicat proprietățile de la .form */
+.nav .container {
+  display: flex;
+  flex-direction: row; /* Navbar-ul e orizontal */
+  align-items: center;
+  gap: 15px;
+  background-color: white;
+  padding: 1em 2em; /* Puțin mai îngust pe verticală decât form-ul */
+  border-radius: 25px;
+  transition: .4s ease-in-out;
+  box-shadow: rgba(0, 0, 0, 0.4) 1px 2px 2px;
+  border: 1px solid transparent;
+}
+
+/* Efectul de hover pe tot navbar-ul (la fel ca .form:hover) */
+.nav .container:hover {
+  transform: translateX(-0.5em) translateY(-0.5em);
+  border: 1px solid #171717;
+  box-shadow: 10px 10px 0px #666666;
+}
+
+/* Butoanele din navbar (la fel ca .form .btn) */
+.btn {
+  all: unset; /* Curățăm stilul default de buton */
+  cursor: pointer;
+  padding: 0.7em 1.2em;
+  border-radius: 10px;
+  border: none;
+  color: black;
+  font-weight: bold;
+  background-color: whitesmoke; /* Fundalul de la input-uri */
+  transition: .4s ease-in-out;
+  box-shadow: rgba(0, 0, 0, 0.4) 1px 1px 1px;
+}
+
+.btn:hover {
+  box-shadow: 6px 6px 0px #969696, -3px -3px 10px #ffffff;
+  transform: translateX(-0.5em) translateY(-0.5em);
+  background-color: white;
+}
+
+.btn:active {
+  transition: .2s;
+  transform: translateX(0em) translateY(0em);
+  box-shadow: none;
+}
+
+/* ---------------------------------------- FORM */
+
+.form {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 10px;
+  background-color: white;
+  padding: 2.5em;
+  border-radius: 25px;
+  transition: .4s ease-in-out;
+  box-shadow: rgba(0, 0, 0, 0.4) 1px 2px 2px;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.form:hover {
+  transform: translateX(-0.5em) translateY(-0.5em);
+  border: 1px solid #171717;
+  box-shadow: 10px 10px 0px #666666;
+}
+
+.heading {
+  color: black;
+  padding-bottom: 2em;
   text-align: center;
-}
-
-.login-card h1 {
-  color: #334155;
-  font-size: 1.8rem;
-  font-weight: 800;
-  letter-spacing: 2px;
-}
-
-/* Input-uri */
-.input-group input {
-  width: 100%;
-  padding: 12px;
-  margin-bottom: 1rem;
-  border: 1px solid #cbd5e1;
-  border-radius: 8px;
-  color: #000;
-  outline: none;
-}
-
-/* Butonul tău FIXAT */
-.login-btn-container {
-  position: relative;
-  width: 100%;
-  height: 60px;
-  background: #6b3fa0;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  overflow: hidden; /* Foarte important: să nu iasă SVG-ul afară */
-}
-
-.btn-text {
-  color: white;
   font-weight: bold;
-  text-transform: uppercase;
-  z-index: 2;
 }
 
-.rect {
-  fill: transparent;
-  stroke: white;
-  stroke-width: 4;
-  width: 100%;
-  height: 100%;
-  /* Animarea ta originală adaptată */
-  stroke-dasharray: 0 100;
-  stroke-dashoffset: 0;
-  transition: 0.6s ease;
+.input {
+  all: unset;
+  border-radius: 5px;
+  border: 1px solid whitesmoke;
+  background-color: whitesmoke;
+  outline: none;
+  padding: 0.7em;
+  transition: .4s ease-in-out;
 }
 
-.login-btn-container:hover .rect {
-  stroke-dasharray: 100 0;
+.input:hover {
+  box-shadow: 6px 6px 0px #969696,
+             -3px -3px 10px #ffffff;
+}
+
+.input:focus {
+  background: #ffffff;
+  box-shadow: inset 2px 5px 10px rgba(0,0,0,0.3);
+}
+
+.form .btn {
+  margin-top: 2em;
+  align-self: center;
+  padding: 0.7em;
+  padding-left: 1em;
+  padding-right: 1em;
+  border-radius: 10px;
+  border: none;
+  color: black;
+  transition: .4s ease-in-out;
+  box-shadow: rgba(0, 0, 0, 0.4) 1px 1px 1px;
+}
+
+.form .btn:hover {
+  box-shadow: 6px 6px 0px #969696,
+             -3px -3px 10px #ffffff;
+  transform: translateX(-0.5em) translateY(-0.5em);
+}
+
+.form .btn:active {
+  transition: .2s;
+  transform: translateX(0em) translateY(0em);
+  box-shadow: none;
+}
+
+/*----------------------------------------- DASHBOARD */
+
+/* Containerul care ține tot Dashboard-ul */
+.dashboard-grid {
+  display: grid;
+  /* Creăm 3 coloane egale care se adaptează ecranului */
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Stilul de bază pentru orice "casetă" (card) din Dashboard */
+/* Aplicăm stilul tău memorat: whitesmoke, border-radius 25px, shadow */
+.dashboard-card {
+  background-color: white;
+  border-radius: 25px;
+  padding: 1.5em;
+  box-shadow: rgba(0, 0, 0, 0.4) 1px 2px 2px;
+  transition: .4s ease-in-out;
+  border: 1px solid transparent;
+}
+
+.dashboard-card:hover {
+  transform: translateX(-0.3em) translateY(-0.3em);
+  border: 1px solid #171717;
+  box-shadow: 8px 8px 0px #666666;
 }

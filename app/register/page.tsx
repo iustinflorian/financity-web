@@ -26,10 +26,7 @@ export default function RegisterPage() {
             });
 
             if (response.ok){
-                const data = await response.json();
-                console.log("Registration successful:", data);
-                localStorage.setItem("user_session", JSON.stringify(data));
-                router.push("/dashboard");
+                router.push("/verify");
             }
         } catch (error){
             console.error("Registration failed:", error);
@@ -38,31 +35,46 @@ export default function RegisterPage() {
 
     return (
         <div>
-            <h1>Register</h1>
-            <input 
-                type = "email"
-                placeholder = "Enter your email"
-                value = {email}
-                onChange={(e) => setEmail(e.target.value)}
-            />
-            <input 
-                type = "username"
-                placeholder = "Enter your username"
-                value = {username}
-                onChange={(e) => setUsername(e.target.value)}
-            />
-            <input
-                type = "password"
-                placeholder = "Enter your password"
-                value = {password}
-                onChange={(e) => setPassword(e.target.value)}
-            />
-            <button onClick={handleRegister}>Register</button>
-            <button onClick={
-                () => {
-                    router.push("/login")
-                }
-            }>Already have an account?</button>
+            <form className="form">
+                <p className="heading">
+                    Get started with 
+                    <span className="bg-gradient-to-r from-blue-800 to-green-500 bg-clip-text text-transparent font-bold"> FinanCity</span>
+                </p>
+                <input 
+                    className="input"
+                    type = "email"
+                    placeholder = "email@example.com"
+                    value = {email}
+                    onChange={(e) => setEmail(e.target.value)}
+                />
+                <input 
+                    className="input"
+                    type = "username"
+                    placeholder = "username"
+                    value = {username}
+                    onChange={(e) => setUsername(e.target.value)}
+                />
+                <input
+                    className="input"
+                    type = "password"
+                    placeholder = "•••••••••••"
+                    value = {password}
+                    onChange={(e) => setPassword(e.target.value)}
+                />
+                <button 
+                    className="btn"
+                    type="button"
+                    onClick={handleRegister}
+                    >Register</button>
+                <button 
+                    className="cursor-pointer text-sm bg-blue-700 bg-clip-text text-transparent"
+                    type="button"
+                    onClick={
+                    () => {
+                        router.push("/login")
+                    }
+                }>Already have an account?</button>
+            </form>
         </div>
     );
 }
