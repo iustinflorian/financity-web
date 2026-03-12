@@ -22,7 +22,7 @@ export default function LoginPage() {
                 router.push("/dashboard");
             }
         } catch (error){
-            console.error("Login failed:", error);
+            alert("Login failed: " + error);
         }
     };
     

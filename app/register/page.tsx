@@ -29,7 +29,7 @@ export default function RegisterPage() {
                 router.push("/verify");
             }
         } catch (error){
-            console.error("Registration failed:", error);
+            alert("Registration failed: " + error);
         }
     };
 
