@@ -33,7 +33,7 @@ export default function TransactionsPage() {
         }
     }, [accounts, selectedAccountId]);
 
-    const handleTransaction = async (e: React.FormEvent) => {
+    const handleTransaction = async (e: React.SubmitEvent) => {
         e.preventDefault();
 
         if (!selectedAccountId) {
@@ -81,12 +81,10 @@ export default function TransactionsPage() {
     if (loading) return <div className="dashboard-wrapper" style={{color: 'white'}}>Loading accounts...</div>;
 
     return (
-        <div className="max-w-md mx-auto">
-            {!activeModal && (
-                <div className="form">
-                    <h2 className="heading">Financial Operations</h2>
-                    
-                    <label style={{color: 'black', fontSize: '0.8rem', fontWeight: 'bold'}}>SELECT SOURCE ACCOUNT</label>
+        <div className="">
+            {!activeModal && accounts.length > 0 &&(
+             <div className="form">
+                    <label className="heading">Select active account:</label>
                     <select 
                         className="input" 
                         value={selectedAccountId} 
@@ -103,6 +101,13 @@ export default function TransactionsPage() {
                     <button className="btn" onClick={() => setActiveModal("DEPOSIT")}>Deposit Money</button>
                     <button className="btn" onClick={() => setActiveModal("WITHDRAW")}>Withdraw Money</button>
                     <button className="btn" onClick={() => setActiveModal("TRANSFER")}>Send Money (Transfer)</button>
+                </div>
+            )}
+
+            {!activeModal && accounts.length == 0 &&(
+                <div className="form">
+                    <h2 className="heading">No accounts available</h2>
+                    <button className="btn" type="button" onClick={() => router.push("/accounts")}>Create your first account!</button>
                 </div>
             )}
 
@@ -134,10 +139,12 @@ export default function TransactionsPage() {
                         />
                     )}
 
-                    <button className="btn" type="submit">Confirm {activeModal}</button>
-                    <button className="btn" type="button" onClick={closeModal} style={{backgroundColor: '#ff4444', color: 'white'}}>
-                        Cancel
-                    </button>
+                    <div className="btn-group">
+                        <button className="btn" type="submit">Confirm</button>
+                        <button className="btn" type="button" onClick={closeModal} style={{backgroundColor: '#ff4444', color: 'white'}}>
+                            Cancel
+                        </button>
+                    </div>
                 </form>
             )}
         </div>

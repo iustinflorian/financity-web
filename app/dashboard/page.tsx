@@ -31,7 +31,7 @@ export default function DashboardPage() {
         <div className="dashboard-wrapper">
             <div className="dashboard-grid">
                 <div className="card">
-                    <p className="heading" style={{ paddingBottom: '0.5em', fontSize: '1rem' }}>Total Balance</p>
+                    <p className="heading" style={{ paddingBottom: '0.5em', fontSize: '1rem' }}>Balance (All accounts)</p>
                     <div className="placeholder-box">{loading ? "..." : `${totalBalance.toLocaleString()} RON`}</div>
                 </div>
 
@@ -41,7 +41,7 @@ export default function DashboardPage() {
                 </div>
 
                 <div className="card span-full">
-                    <p className="heading" style={{ textAlign: 'left', paddingBottom: '1em' }}>Spending Analytics</p>
+                    <p className="heading" style={{ textAlign: 'left', paddingBottom: '1em' }}>Analytics (Soon to be replaced by AI)</p>
                     <div className="placeholder-box">...</div>
                 </div>
             </div>

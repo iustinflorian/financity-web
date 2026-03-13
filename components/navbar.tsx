@@ -34,8 +34,8 @@ export default function Navbar() {
         <div className={`btn ${isActive("/dashboard") ? "active" : ""}`} onClick={() => router.push("/dashboard")}>
           Dashboard
         </div>
-        <div className={`btn ${isActive("/info") ? "active" : ""}`} onClick={() => router.push("/info")}>
-          Information
+        <div className={`btn ${isActive("/accounts") ? "active" : ""}`} onClick={() => router.push("/accounts")}>
+          Accounts
         </div>
         <div className={`btn ${isActive("/trx") ? "active" : ""}`} onClick={() => router.push("/trx")}>
           Transactions

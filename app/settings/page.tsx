@@ -56,13 +56,13 @@ export default function SettingsPage () {
         <div className={`max-w-md mx-auto`}>
                     {!showModal && (
                         <form className="form">
+                            <h2 className="heading">Available Settings</h2>
                             <button className="btn" type="button" onClick={() => setShowModal(true)}>Change password</button><br/>
                         </form>
                     )}
         
                     {showModal && (
                         <form className="form">
-                            <br></br>
                             <h3 className="heading">Enter your old password</h3>
                             <input
                                 className="input"
@@ -70,14 +70,14 @@ export default function SettingsPage () {
                                 placeholder="Enter password.."
                                 value={oldPassword}
                                 onChange={(e) => setOldPassword(e.target.value)}
-                            /><br/>
+                            />
                             <input
                                 className="input"
                                 type="password"
                                 placeholder="Confirm password.."
                                 value={confirmPassword}
                                 onChange={(e) => setConfirmPassword(e.target.value)}
-                            /><br/>
+                            />
                             <h3 className="heading">Enter your new password</h3>
                             <input
                                 className="input"
@@ -86,9 +86,12 @@ export default function SettingsPage () {
                                 value={newPassword}
                                 onChange={(e) => setNewPassword(e.target.value)}
                             />
-
-                            <button className="btn" type="button" onClick={handleUpdatePassword}>Submit</button>
-                            <button className="btn" type="button" onClick={() => setShowModal(false)}>Cancel</button>
+                            
+                            <div className="btn-group">
+                                <button className="btn" type="button" onClick={handleUpdatePassword}>Submit</button>
+                                <button className="btn" type="button" onClick={() => setShowModal(false)}>Cancel</button>
+                            </div>
+                            
                         </form>
                     )}
         </div>
