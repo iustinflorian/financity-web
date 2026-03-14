@@ -23,39 +23,43 @@ body {
 }
 
 @media (max-width: 600px) {
-  .nav .container {
-    flex-wrap: wrap; 
-    justify-content: center;
+  .nav .container, .nav-container {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
     gap: 8px !important;
-    padding: 15px !important;
-    width: 90%;
-    margin: 0 auto;
+    width: 100% !important;
+    padding: 10px !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
   }
 
-  .nav-container {
-    padding-top: 5px !important;
-    padding-bottom: 1px !important;
-  }
-
-  .btn {
+  .nav .btn, .nav-button {
     padding: 8px 12px !important;
-    font-size: 12px !important;
-    flex: 1 1 calc(40% - 10px);
-    text-align: center;
+    font-size: 11px !important;
+    flex: 0 1 auto !important;
+    min-width: fit-content !important;
+    white-space: nowrap !important;
+    width: auto !important;
   }
 
   .dashboard-grid {
-    grid-template-columns: 1fr !important; 
-    gap: 20px;
+    grid-template-columns: 1fr !important;
+    padding: 10px !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+    overflow-x: hidden !important;
   }
 
   .card {
+    max-width: 100% !important;
     width: 100% !important;
-    box-sizing: border-box; 
+    margin: 0 auto !important;
   }
 
-  .span-full, .span-2 {
+  .span-full, .span-2, .card.span-full {
     grid-column: span 1 !important;
+    width: 100% !important;
   }
 }
 
@@ -65,7 +69,7 @@ body {
   width: 100%;
   display: flex;
   justify-content: center;
-  padding: 20px 0;
+  padding: 20px 0 0;
 }
 
 .nav .container {
@@ -217,6 +221,17 @@ body {
   transition: .4s ease-in-out;
 }
 
+.input-nohover {
+  all: unset;
+  border-radius: 5px;
+  border: 1px solid whitesmoke;
+  background-color: whitesmoke;
+  outline: none;
+  padding: 0.7em;
+  transition: .4s ease-in-out;
+  cursor: auto;
+}
+
 .input:hover {
   box-shadow: 6px 6px 0px #969696,
              -3px -3px 10px #ffffff;
@@ -277,4 +292,34 @@ body {
   transform: translateX(-0.3em) translateY(-0.3em);
   border: 1px solid #171717;
   box-shadow: 8px 8px 0px #666666;
+}
+
+/* ----------------------------------------------------- TOOLTIP */
+
+
+.tooltip-wrap { position: relative; }
+
+.tooltip-wrap:hover::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #171717;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 8px;
+  font-size: 12px;
+  white-space: nowrap;
+  z-index: 10;
+}
+
+.tooltip-wrap:hover::before {
+  content: "";
+  position: absolute;
+  bottom: 80%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-top-color: #171717;
 }

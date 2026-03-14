@@ -46,7 +46,7 @@ export default function TransactionsPage() {
         
         if (activeModal === "TRANSFER") {
             body = {
-                targetIban: targetIban,
+                toIban: targetIban,
                 amount: parseFloat(amount)
             };
         } else {

@@ -9,29 +9,36 @@ export function useAccounts() {
     const router = useRouter();
 
     useEffect(() => {
-        const session = localStorage.getItem("user_session");
-        
-        try {
-            const parsed = JSON.parse(session || ""); 
-            setUser(parsed);
+    const session = localStorage.getItem("user_session");
+    
+    if (!session) {
+        router.push("/login");
+        return;
+    }
 
-            if (parsed.id != null) {
-                fetch(`http://localhost:8080/api/accounts/${parsed.id}/acc`)
-                    .then(res => res.json())
-                    .then(data => {
-                        setAccounts(Array.isArray(data) ? data : []);
-                        setLoading(false);
-                    })
-                    .catch(err => {
-                        console.error("API Error", err);
-                        setLoading(false);
-                    });
-            }
-        } catch (e) {
-            localStorage.clear();
-            router.push("/login");
+    try {
+        const parsed = JSON.parse(session); 
+        setUser(parsed);
+
+        if (parsed?.id) {
+            fetch(`http://localhost:8080/api/accounts/${parsed.id}/acc`)
+                .then(res => res.json())
+                .then(data => {
+                    setAccounts(Array.isArray(data) ? data : []);
+                    setLoading(false);
+                })
+                .catch(err => {
+                    console.error("API Error", err);
+                    setLoading(false);
+                });
+        } else {
+            setLoading(false);
         }
-    }, [router]);
+    } catch (e) {
+        localStorage.removeItem("user_session");
+        router.push("/login");
+    }
+}, []);
 
     return { accounts, user, loading };
 }
